@@ -4,7 +4,6 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { checkAuth } from '@/lib/auth/utils';
 
 interface GenerateImageResponse {
   imageUrl: string;
@@ -28,13 +27,6 @@ const ImageGenerator = () => {
     setIsLoading(true);
     setError('');
     console.log('prompt', prompt);
-    // check if the user is authenticated
-    const authResponse = await fetch('/api/check-auth');
-    if (!authResponse.ok) {
-      window.location.href = '/sign-up';
-
-      return;
-    }
 
     try {
       const response = await fetch('/api/generate-image', {
@@ -62,7 +54,7 @@ const ImageGenerator = () => {
   return (
     <div>
       <Input
-        type='text'
+        type="text"
         value={prompt}
         onChange={handlePromptChange}
         placeholder='Enter your brand name'
@@ -72,9 +64,7 @@ const ImageGenerator = () => {
         {isLoading ? 'Generating...' : 'Generate Image'}
       </Button>
       {error && <p>{error}</p>}
-      {imageUrl && (
-        <Image src={imageUrl} alt='Generated' width={500} height={500} />
-      )}
+      {imageUrl && <Image src={imageUrl} alt="Generated" width={500} height={500} />}
     </div>
   );
 };
