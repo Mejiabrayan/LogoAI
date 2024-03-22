@@ -1,4 +1,4 @@
-# To-Do List for My App
+# To-Do List for LogoAI
 
 ## Features to Add:
 1. Implement resend functionality for email verification.
